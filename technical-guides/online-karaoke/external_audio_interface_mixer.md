@@ -29,7 +29,7 @@ This document breaks down how your **Yamaha AG06(or other) Mixer**, **OBS**, and
 │   │   │  Headphones]  │   │         ┌───────────────────────────┐
 │   │   └───────▲───────┘   │         │     [COMP 3: SONOBUS]     │
 │   │           │           │         ├───────────────────────────┤
-│   │           ▼           │         │ ┌───────────────────────┐ │
+│   │           |           │         │ ┌───────────────────────┐ │
 │   │   ┌───────────────┐   │         │ │    INTERNET INPUT     │ │
 │   │   │  USB AUDIO IN │◄──┼─────────┼─┤ • Friends' Voices     │◄┼─── [INPUT 3: Friends'
 │   │   │(Music+Friends)│   │         │ │   (Goes to: USB In)   │ │      Voice from Internet]
