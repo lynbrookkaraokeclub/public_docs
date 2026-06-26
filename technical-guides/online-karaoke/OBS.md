@@ -30,7 +30,7 @@ When you install OBS for the first time, an **Auto-Configuration Wizard** will a
 
 To properly isolate your audio and capture only what you intend, follow these configuration steps in order:
 
-### Step 1: Configure Global Audio Settings (Turn Off Automatic Capture)
+### Step 1: Configure Global Audio Settings (Turn Off Automatic Capture) ![Screenshot](../../images/instructions/OBS-Global-Setting.png)
 Before adding specific elements, you must stop OBS from automatically listening to your whole computer.
 1. Go to **Settings** in the bottom-right corner of OBS, and click on the **Audio** tab on the left menu.
 2. Locate the **Global Audio Devices** section.
@@ -56,7 +56,7 @@ Now that your scene is created, look at the **Sources** dock immediately below t
 4. In the properties window that pops up, select the target window of your music source (e.g., Chrome playing YouTube) from the dropdown list to lock it in.
 5. This portion can differ between Windows and Mac. Feel free to experiment. But fundamentally you're trying to capture sound and/or screen from a particular application.
 
-### Step 5: Configure the Audio Mixer and Advanced Routing
+### Step 5: Configure the Audio Mixer and Advanced Routing ![Screenshot](../../images/instructions/OBS-Audio-Mixer-Setting.png)
 Look at the **Audio Mixer** window in the bottom center of OBS. 
 
 > 💡 **The Audio Mixer Rule:** Everything visible in the Audio Mixer window is what is currently being "copied" by OBS in that active Scene. If you switch to a different Scene, the Audio Mixer will instantly change to show a different set of captured inputs.
