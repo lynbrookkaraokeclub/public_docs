@@ -92,7 +92,28 @@ When a source is set to **Monitor and Output**, OBS duplicates the audio signal 
 
 ---
 
-## 5. Summary of Benefits
+## 5. Recording the Group Audio and Video Layout
+
+To compile a complete visual and auditory archive of the karaoke event, you must capture the voices of the group singing along alongside the synchronized lyrics video.
+
+### Step-by-Step Recording Scene Setup
+1. Go to the **Scenes** dock, click the **`+` (Add)** icon, and create a separate scene named `Session Recording Master`.
+2. **Capture the Group Audio:** In the **Sources** dock for this scene, click the **`+`** icon and select **Application Audio Capture**. Target your group audio software application (e.g., SonoBus) to pull the incoming group vocals into the OBS mixer.
+3. **Configure Group Audio Routing:** Open the **Advanced Audio Properties** for this group source. Set it to **Monitor Off** (or *Output Only*). Since you can already hear your group via your system's normal playback, choosing *Monitor Off* here prevents it from going to the OBS output while allowing OBS to record them.
+4. **Capture the Visual Lyrics Video:** Click the **`+`** icon in the Sources dock again, and select **Window Capture** (or *Browser* or *macOS Screen Capture*). Target the application window you are using to synchronize the session—such as a browser running **WatchTogether**, which tracks and syncs the YouTube karaoke video playing the lyrics. Stretch this window layer to fit the canvas screen. Note that it's possible that this video capture will also capture the audio. If this is the case, simply mute the source.
+
+### 🎬 The End Result
+By configuring your recording scene this way, hitting **Start Recording** packages a complete video archive. The final output file will visually display the YouTube karaoke video with the lyrics moving along in perfect lockstep on screen, perfectly mixed with the synchronized live singing of your online group.
+
+### ⚡ Why the Choice of Group Audio Software Matters (The Latency Factor)
+When selecting software to run the live session, latency (audio lag) is the single most important factor:
+
+* **SonoBus (The Recommended Standard):** This setup utilizes SonoBus because it is explicitly designed for high-fidelity, peer-to-peer, ultra-low-latency audio transmission through the internet. This allows the group to sing together in near-perfect synchronization, resulting in a cohesive, clean archive recording.
+* **Discord & Zoom (High-Lag Risks):** While you *can* use OBS to capture a Discord voice channel or a Zoom meeting using the exact same steps above, **these platforms are optimized for speech compression, not live music**. They introduce noticeable internet lag and processing delays. Singing over them will cause the group's vocals to arrive heavily out of sync with the backing tracks, destroying the quality of the recorded session.
+
+---
+
+## 6. Summary of Benefits
 
 * **Zero Background Noise:** Because all Global Audio Devices are disabled and your source uses *Application Audio Capture*, unexpected noises (like system error sounds, emails popping up, or private message notifications) will never be copied or heard by the audience.
 * **High-Quality Archives:** Club officers can hit the **Start Recording** button in OBS at any time. OBS will cleanly capture the exact scene layout (video lyrics + captured singing audio) and package them into a high-quality video file perfect for the club archives.
