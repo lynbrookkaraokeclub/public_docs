@@ -1,6 +1,6 @@
 # The High Level Setup Guide For Using External Audio Interfaces/Mixers
 
-This document breaks down how your **Yamaha AG06 Mixer**, **OBS**, and **SonoBus** work together to create a seamless live streaming/karaoke setup. This routing ensures zero-latency monitoring for your voice, captures high-quality music, and delivers a perfect mix to the internet without feedback loops.
+This document breaks down how your **Yamaha AG06(or other) Mixer**, **OBS**, and **SonoBus** work together to create a seamless live streaming/karaoke setup. This routing ensures zero-latency monitoring for your voice, captures high-quality music, and delivers a perfect mix to the internet without feedback loops.
 
 ---
 
