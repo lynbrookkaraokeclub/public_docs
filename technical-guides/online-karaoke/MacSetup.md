@@ -114,12 +114,13 @@ Because SonoBus can only connect to a single input hardware option at one time, 
 
 1. Launch the **Audio MIDI Setup** utility (Press `Cmd + Space`, type `Audio MIDI Setup`, and press `Enter`).
 2. Navigate to the bottom-left corner of the sidebar, click the native **`+` icon**, and select **Create Aggregate Device**.
-3. Double-click the default title of this new entry and rename it to exactly: `Karaoke Aggregate Input`.
+3. Double-click the default title of this new entry and rename it to something like: `Karaoke Aggregate Input`.
 4. In the grid panel on the right side, check the device option boxes in this specific order to construct your sub-channel map:
     * **Check Your Physical Microphone** (or USB Audio Interface) first. This hard-maps your vocal stream to **Channel 1**.
     * **Check BlackHole 2ch** second. This links the software capture pipeline to the next available slots: **Channels 2 and 3**.
-5. **Enable Drift Correction:** Check the **Drift Correction** box specifically for **BlackHole 2ch**. This is a mandatory step that prevents the virtual driver's timing from desynced timing errors relative to your physical hardware mic over long singing sessions.
-6. **Take Note of Your Channel Mapping:** Write down or carefully note which channels belong to which source (e.g., Channel 1 = Microphone, Channels 2-3 = BlackHole 2ch Music). You will need to know these exact designations when managing the Input Mixer inside SonoBus.
+5. **Clock Source**: Since you selected the microphone first, that should be your clock source device. If not, set the microphone to your clock source device.
+6. **Enable Drift Correction:** Check the **Drift Correction** box specifically for **BlackHole 2ch**. This is a mandatory step that prevents the virtual driver's timing from desynced timing errors relative to your physical hardware mic over long singing sessions.
+7. **Take Note of Your Channel Mapping:** Write down or carefully note which channels belong to which source (e.g., Channel 1 = Microphone, Channels 2-3 = BlackHole 2ch Music). You will need to know these exact designations when managing the Input Mixer inside SonoBus.
 
 ---
 
@@ -133,11 +134,12 @@ For a standalone live Mac karaoke setup, configure your OBS layers using these e
 
 1. Open **Discord**, join a voice room, and launch a **WatchTogether** activity from the Activities tray button.
 2. Launch **OBS Studio**. Under the **Sources** dock at the bottom, click the **`+` icon** and add **macOS Audio Capture**. Set its properties to target the **Discord** application explicitly to isolate the track music.
-3. Click the **`+` icon** again and add **macOS Screen Capture**. Choose the specific window layer targeting Discord so your screen displays the video lyrics cleanly.
-4. Navigate into the application preferences: **Settings > Audio > Advanced**.
-5. Locate the **Monitoring Device** dropdown configuration menu and set it to **BlackHole 2ch**. Click **Apply** and hit **OK**.
-6. Find the Discord fader track in your main OBS Audio Mixer section, click its configuration properties icon (the three vertical dots), and select **Advanced Audio Properties**.
-7. **Set to Monitor Only:** Since our goal is purely live streaming performance over the network and **not recording** local files to your hard drive, locate your Discord capture source track line, scroll over to its **Audio Monitoring** dropdown menu, and switch it to **Monitor Only (mute output)**. This routes the audio strictly out through your virtual monitor cable without creating unnecessary local rendering overhead.
+3. Navigate into the application preferences: **Settings > Audio > Global Audio Devices**
+4. Set all devices in this section (Desktop Audio, Mic/Auxiliary Audio, etc.) to DISABLED. This ensures OBS does not automatically capture sound sources that you do not want on your recording or stream.
+5. Navigate into the application preferences: **Settings > Audio > Advanced**.
+6. Locate the **Monitoring Device** dropdown configuration menu and set it to **BlackHole 2ch**. Click **Apply** and hit **OK**.
+7. Find the Discord fader track in your main OBS Audio Mixer section, click its configuration properties icon (2 gears), and select **Advanced Audio Properties**.
+8. **Set to Monitor Only:** Since our goal is purely live streaming performance over the network and **not recording** local files to your hard drive, locate your Discord capture source track line, scroll over to its **Audio Monitoring** dropdown menu, and switch it to **Monitor Only (mute output)**. This routes the audio strictly out through your virtual monitor cable without creating unnecessary local rendering overhead.
 
 ---
 
@@ -149,7 +151,7 @@ For a standalone live Mac karaoke setup, configure your OBS layers using these e
 2. Inside the audio device matrix panel, map your system routes as follows:
     * **Input Device:** Select your custom created **Karaoke Aggregate Input** option.
     * **Channel Selection:** You must explicitly make sure that **all 3 inputs** (Channel 1, Channel 2, and Channel 3) are active and selected underneath the Input Device assignment area. Leaving any unchecked will permanently drop that respective voice or music leg before it ever reaches the application.
-    * **Output Device:** Choose your physical system monitoring hardware (e.g., your Mac Built-In Headphones Jack, your external USB DAC, or your hardware audio interface line monitor ports).
+    * **Output Device:** Choose your physical system monitoring hardware (e.g., your Mac Built-In Headphones Jack, your external USB DAC, or your hardware audio interface line monitor ports). Also select both output channels.
 3. **Hardware Latency Thresholds:** Set your operational **Sample Rate** to `48000 Hz` (48 kHz) and drop your processing **Buffer Size** to `128 samples` (or `64 samples` if your Mac processor handles it cleanly). This eliminates local processing lag without introducing audio dropouts or click artifacts.
 
 ---
@@ -158,13 +160,33 @@ For a standalone live Mac karaoke setup, configure your OBS layers using these e
 
 The **Input Mixer** control button is located at the **middle top** of the primary SonoBus window layout. Clicking it expands your multi-channel lane configuration overlay. This is where your written MIDI sub-channel notes are applied:
 
-* **Channel 1 (Your Microphone Voice):** Set this single vertical track to **Send Mono**. Microphones should always transmit in mono so your singing remains perfectly centered within everyone else's headphones.
-* **Channels 2-3 (Discord Music Loopback via BlackHole 2ch):** Click the link icon on these adjacent channels to handle them together as a stereophonic pair, and switch the toggle selection to **Send Stereo**. This preserves the spatial fidelity, depth, and original panning layouts of the instrument backing files.
+* **Input Group for Channel 1 (Your Microphone Voice):** Set this single vertical track to **Send Mono**. Microphones should always transmit in mono so your singing remains perfectly centered within everyone else's headphones. If this input group doesn't already exist, you can use the **'+'** button to add it as **Mono**
+* **Input Group for Channels 2-3 (Discord Music Loopback via BlackHole 2ch):** If this input group doesn't already exist, you can use the **'+'** button to add it as **Stereo**. Make sure the group contains channel 2-3. This preserves the spatial fidelity, depth, and original panning layouts of the instrument backing files.
 * **Pre-Flight Balancing:** Use the individual volume faders inside this top Input Mixer tray to scale your local voice levels independently from the music tracks *before* your combined performance enters the outbound network internet broadcast.
 
 ---
 
-## 6. Operational Dashboard Adjustments
+## 6. Pre-Flight Signal & Level Testing
+
+Before connecting to a live session with other group members, perform this visual audio meter sequence to guarantee each component is successfully recognizing the individual streams.
+
+### 🧪 Test 1: Microphone Signal Isolation
+1. Silence all music playback on your computer.
+2. Speak or sing directly into your physical microphone.
+3. Open the **Input Mixer** overlay panel (middle top button) in SonoBus.
+4. **Visual Confirmation:** Look closely at **Channel 1**. You should see the green/yellow volume indicator bars actively bouncing up and down in direct sync with your voice. Meanwhile, **Channels 2-3** must remain completely flat and silent.
+
+### 🧪 Test 2: Discord/WatchTogether Music Pipeline Isolation
+1. Take off your headphones or move your microphone away from any speakers to avoid feedback loop bleed.
+2. Play a karaoke backing track inside the Discord WatchTogether activity room.
+3. Open the **OBS Studio** main console interface. 
+   * **Visual Confirmation (OBS):** Look at the audio level meter corresponding to your *macOS Audio Capture* source. The volume bars should be bouncing actively. If this meter is completely still, OBS is not capturing Discord.
+4. Keep the music playing and look back at the **Input Mixer** overlay panel in SonoBus.
+   * **Visual Confirmation (SonoBus):** Look closely at **Channels 2-3**. The stereo volume indicator bars should be moving dynamically to the music. Concurrently, **Channel 1** must remain completely flat and quiet. If Channels 2-3 are still, your virtual BlackHole routing between OBS and your MIDI Aggregate Setup is misconfigured.
+
+---
+
+## 7. Operational Dashboard Adjustments
 
 Outside of the Input Mixer, the primary window houses your global listening modifiers on the main interface. **Crucially: Neither the Monitor slider nor the Out Level slider controls your outbound transmission volume on the web.** They exist solely to balance your own local ears:
 
@@ -185,7 +207,7 @@ Outside of the Input Mixer, the primary window houses your global listening modi
 
 ---
 
-## 7. Connecting to your Karaoke Group Session
+## 8. Connecting to your Karaoke Group Session
 
 The **Connect** button is located at the top of the screen and serves as the gateway to link multiple remote users into a unified low-latency session.
 
@@ -194,3 +216,6 @@ The **Connect** button is located at the top of the screen and serves as the gat
 3. **Password:** If your group requires privacy (strongly recommended for structured sessions), enter the room password.
 4. **Your Name:** Type a clear, recognizable display name into the text box so your group members can distinguish your specific audio track strip easily.
 5. Click **Connect**. Once successfully handshake-linked, your remote group users will instantly form dynamic individual mixer faders across the center of your primary dashboard window, giving you full structural control to selectively balance your live multi-user environment.
+
+
+
