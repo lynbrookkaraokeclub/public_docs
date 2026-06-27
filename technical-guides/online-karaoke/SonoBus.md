@@ -32,7 +32,7 @@ To configure how SonoBus talks to your local computer, click the **Gear Icon** l
 
 The **Input Mixer** button is located in the **middle top** of the main SonoBus window. Clicking this opens the multi-channel configuration overlay.
 
-* **Channel Matching:** You must ensure that the channels activated inside the Input Mixer window explicitly match the physical or digital channels of your configured input device. 
+* **Channel Matching:** You must ensure that the channels activated inside the Input Mixer window explicitly match the physical or digital channels of your configured input device. If they don't you can add input group by clicking on the **'+'** button. You can also remove existing input groups.
 * **Independent Volume Control:** If your input hardware separates your background music and your microphone into independent channels, the Input Mixer will display them as separate strips. This allows you to adjust the volume of your voice independently from the volume of the backing tracks before it ever leaves your machine.
 
 ---
