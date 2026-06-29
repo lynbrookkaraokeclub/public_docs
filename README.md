@@ -10,11 +10,3 @@ Our documentation is designed to mirror our digital infrastructure, ensuring tra
 
 This repository is organized into distinct modules to make finding structural documentation straightforward:
 
-```text
-├── .github/                 # CI/CD workflows and issue templates
-├── governance/              # Club constitution, policies, and operational frameworks
-├── infrastructure/          # Public technical architecture specs & server layout designs
-│   └── templates/           # Reusable configuration blue prints (read-only references)
-├── onboarding/              # Guides, wikis, and applications for prospective members
-└── README.md                # This root directory map
-```
