@@ -4,7 +4,7 @@ This comprehensive configuration guide outlines how to build an ultra-low-latenc
 
 By leveraging **Discord** (for communications and WatchTogether multimedia), **OBS Studio** (for application-specific audio isolation), **BlackHole** (for internal audio plumbing), and **SonoBus** (as your master peer-to-peer network mixer), you can sing with remote performers in real time without audio drift, heavy compression, or distracting echo.
 
----
+** NEVER USE BLUETOOTH EARBUDS LIKE AIRPODS [Why No Airpods](https://github.com/lynbrookkaraokeclub/public_docs/blob/main/technical-guides/online-karaoke/WhyNoAirPods.md) **
 
 ```
 ===================================================================================
